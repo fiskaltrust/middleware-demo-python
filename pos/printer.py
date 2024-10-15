@@ -1,4 +1,3 @@
-from pos.SignatureFlag import SignatureFormatFlag  
 from model import ReceiptResponse, SignatureItem
 
 
@@ -12,7 +11,6 @@ class ReceiptPrinter:
             receipt_ref = ReceiptResponse.cbReceiptReference
             receipt_moment = ReceiptResponse.ftReceiptMoment
             receipt_identifcation = ReceiptResponse.ftReceiptIdentification
-            print_flag = SignatureFormatFlag(0x4445).get_Flag()
 
             output = f"""
                 -------------------
@@ -30,5 +28,4 @@ class ReceiptPrinter:
             signature_block = "-------- Fiscal-Information --------"
             print(signature_block)
             for sig in ReceiptResponse.ftSignatures:
-                if not sig.ftSignatureFormat & print_flag == print_flag:
-                    print("\n" + sig.ftSignatureCaption + "\n" + sig.ftSignatureData + "\n") 
+                print("\n" + sig.ftSignatureCaption + "\n" + sig.ftSignatureData + "\n") 

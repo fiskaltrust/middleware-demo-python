@@ -19,8 +19,8 @@ example = Example()
 # Create a printer object to print middleware response to the console
 Printer = ReceiptPrinter()
 
-# To Initialize the Queue and activate the TSE, send a initial-operation receipt. Needs to be done once in a queue lifetime
-# Printer.print(mwrequest.sendSign(example.Special_Initial_Operation()))
+# To Initialize the Queue, send a initial-operation receipt. Needs to be done once in a queue lifetime
+Printer.print(mwrequest.sendSign(example.Special_Initial_Operation()))
 
 # Send a simple POS-Receipt (https://middleware-samples.docs.fiskaltrust.cloud/#778edb52-464a-411d-ac3c-301803cab9e8)
 Printer.print(mwrequest.sendSign(example.PosReceipt()))
