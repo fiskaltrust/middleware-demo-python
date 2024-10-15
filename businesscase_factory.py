@@ -72,8 +72,8 @@ class BusinessCaseFactory:
             }
         elif self.country_code == "FR":
             switcher = {
-                'Normal': 0x465200000000003,
-                'Discount1': 0x465200000000001,
+                'Normal': 0x4652000000000003,
+                'Discount1': 0x4652000000000001,
                 'Discount2': 0x465200000000002,
                 'reverse-charge': 0x4652000000000006,
                 'zero': 0x4652000000000005

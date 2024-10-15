@@ -39,8 +39,8 @@ class ReceiptResponse:
                 SignatureItem(
                     sig['ftSignatureFormat'],
                     sig['ftSignatureType'],
-                    sig['Caption'],
-                    sig['Data']
+                    sig.get('Caption') or sig.get('caption'),
+                    sig.get('Data') or sig.get('data')
                 ) for sig in data['ftSignatures']
             ]
 

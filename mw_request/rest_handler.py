@@ -1,6 +1,6 @@
 import requests
 from model import ReceiptResponse
-
+from config import COUNTRY
 class RestRequest:
     def __init__(self,queue_url:str,cashboxid: str = None,cashbox_accesstoken = None):
         self.url = queue_url
@@ -20,11 +20,14 @@ class RestRequest:
 
 
     def sendSign(self, request_json):
-        sign_url = self.url + "/json/v1/Sign"
+        if COUNTRY != 'FR':
+            sign_url = self.url + "/json/v1/Sign"
+        else:
+            sign_url = self.url + "/json/Sign"
         self.request_json = request_json
         try:
             response = requests.post(sign_url,headers=self.headers,data=self.request_json)
-            if response.status_code != 200:
+            if not response.ok:
                  print("CashBoxErrorSign:" + str(response.status_code) + str(response.content ))
             else:
                 receipt_response_object = ReceiptResponse.from_json(response.content)
