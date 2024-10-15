@@ -13,7 +13,7 @@ queue_url = QUEUE_URL
 # Create RestRequest Object to communicate with the middleware
 mwrequest = RestRequest(queue_url,cashboxId,accesstoken)
 
-# Load example requests
+# Load example requests. The examples are executed for the Country defined in config.py (DE,AT,FR)
 example = Example()
 
 # Create a printer object to print middleware response to the console
@@ -39,6 +39,6 @@ Printer.print(mwrequest.sendSign(example.Special_Daily_Closing()))
 
 # Now the auditor wants to check your business. He requests an export of the DSFinV-K
 
-file_export = Exporter()
-file_export.export_dsfinvk(mwrequest,"C:\python_tests","2024-09-26 06:00:00","2024-09-26 17:00:00")
+#file_export = Exporter()
+#file_export.export_dsfinvk(mwrequest,"C:\python_tests","2024-09-26 06:00:00","2024-09-26 17:00:00")
 
