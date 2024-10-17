@@ -54,8 +54,8 @@ class Example:
     def PosReceipt(self): #https://middleware-samples.docs.fiskaltrust.cloud/#778edb52-464a-411d-ac3c-301803cab9e8
         PayItems = []
         ChargeItems = []
-        ChargeItems.append(ChargeItem(Decimal('2.0'),"Coffe to go",Decimal('2.0'),Decimal('19.0'),self.factory.GetChargeItemCase('Normal'),))
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Brötchen",Decimal('2.5'),Decimal('7.0'),self.factory.GetChargeItemCase('Discount1'),))
+        ChargeItems.append(ChargeItem(Decimal('2.0'),"Coffe to go",Decimal('2.0'),self.factory.GetChargeItemCase('Normal').vatRate,self.factory.GetChargeItemCase('Normal').ItemCaseCode,))
+        ChargeItems.append(ChargeItem(Decimal('1.0'),"Brötchen",Decimal('2.5'),self.factory.GetChargeItemCase('Discount1').vatRate,self.factory.GetChargeItemCase('Discount1').ItemCaseCode,))
 
         PayItems.append(PayItem(Decimal('1.0'),"Cash",Decimal('4.5'),self.factory.GetPayItemCase('Cash'),))
 
@@ -68,8 +68,8 @@ class Example:
             PayItems = []
             ChargeItems = []
 
-            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-2.0'),ft_charge_description="Coffe to go",ft_charge_amount=Decimal('-2.0'),ft_charge_vatRate=Decimal('19.0'),ft_charge_Case=self.factory.GetChargeItemCase('Normal'),))
-            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-1.0'),ft_charge_description="Semmel",ft_charge_amount=Decimal('-2.5'),ft_charge_vatRate=Decimal('7.0'),ft_charge_Case=self.factory.GetChargeItemCase('Discount1'),))
+            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-2.0'),ft_charge_description="Coffe to go",ft_charge_amount=Decimal('-2.0'),ft_charge_vatRate=self.factory.GetChargeItemCase('Normal').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Normal').ItemCaseCode,))
+            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-1.0'),ft_charge_description="Semmel",ft_charge_amount=Decimal('-2.5'),ft_charge_vatRate=self.factory.GetChargeItemCase('Discount1').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Discount1').ItemCaseCode,))
 
             PayItems.append(PayItem(ft_pay_quantity=Decimal('-1.0'),ft_pay_description="Cash",ft_pay_amount=Decimal('-4.5'),ft_pay_Case=self.factory.GetPayItemCase('Cash'),))
 
@@ -80,8 +80,8 @@ class Example:
             PayItems = []
             ChargeItems = []
 
-            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-2.0'),ft_charge_description="Coffe to go",ft_charge_amount=Decimal('2.0'),ft_charge_vatRate=Decimal('19.0'),ft_charge_Case=self.factory.GetChargeItemCase('Normal'),))
-            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-1.0'),ft_charge_description="Brötchen",ft_charge_amount=Decimal('2.5'),ft_charge_vatRate=Decimal('7.0'),ft_charge_Case=self.factory.GetChargeItemCase('Discount1'),))
+            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-2.0'),ft_charge_description="Coffe to go",ft_charge_amount=Decimal('2.0'),ft_charge_vatRate=self.factory.GetChargeItemCase('Normal').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Normal').ItemCaseCode,))
+            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-1.0'),ft_charge_description="Brötchen",ft_charge_amount=Decimal('2.5'),ft_charge_vatRate=self.factory.GetChargeItemCase('Discount1').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Discount1').ItemCaseCode,))
 
             PayItems.append(PayItem(ft_pay_quantity=Decimal('-1.0'),ft_pay_description="Cash",ft_pay_amount=Decimal('4.5'),ft_pay_Case=self.factory.GetPayItemCase('Cash'),))
 
@@ -93,8 +93,8 @@ class Example:
     def Info_Order(self): #https://middleware-samples.docs.fiskaltrust.cloud/#59f790db-dd8f-4339-83ae-6b9652c732eb
         PayItems = []
         ChargeItems = []
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),Decimal('19.0'),self.factory.GetChargeItemCase('Normal'),ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),Decimal('7.0'),self.factory.GetChargeItemCase('Discount1'),ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
+        ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),self.factory.GetChargeItemCase('Normal').vatRate,self.factory.GetChargeItemCase('Normal').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
+        ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),self.factory.GetChargeItemCase('Discount1').vatRate,self.factory.GetChargeItemCase('Discount1').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
 
         receipt = ReceiptRequest(self.cashboxId,self.PosSystemId,self.TerminalId,"TR-2992",ChargeItems,PayItems,self.factory.GetReceiptCase('Info-Order'),Decimal('13.0'),receipt_User='Astrid').to_dict()
         receipt_json = json.dumps(receipt)
@@ -103,8 +103,8 @@ class Example:
     def Info_Order_Pay(self): #https://middleware-samples.docs.fiskaltrust.cloud/#e0609e70-5485-48f4-963e-10e06262b2a4
         PayItems = []
         ChargeItems = []
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),Decimal('19.0'),self.factory.GetChargeItemCase('Normal'),ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),Decimal('7.0'),self.factory.GetChargeItemCase('Discount1'),ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
+        ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),self.factory.GetChargeItemCase('Normal').vatRate,self.factory.GetChargeItemCase('Normal').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
+        ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),self.factory.GetChargeItemCase('Discount1').vatRate,self.factory.GetChargeItemCase('Discount1').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
 
         PayItems.append(PayItem(Decimal('1.0'),"Bar",Decimal('13.0'),self.factory.GetPayItemCase('Cash'),ft_pay_CostCenter='1',ft_pay_MoneyGroup='1'))
 
@@ -114,3 +114,5 @@ class Example:
         return receipt_json
     
 
+example = Example()
+print(example.PosReceipt())
