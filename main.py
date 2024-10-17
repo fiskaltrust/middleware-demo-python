@@ -28,10 +28,15 @@ Printer.print(mwrequest.sendSign(example.PosReceipt()))
     # You can also look at the response object coming back from the middleware request
     # print(mwrequest.sendSign(example.PosReceipt()))
 
+# You can void this receipt
+Printer.print(mwrequest.sendSign(example.PosReceiptVoid()))
+
 # Create an order and order a few items. You won't pay yet. (https://middleware-samples.docs.fiskaltrust.cloud/#59f790db-dd8f-4339-83ae-6b9652c732eb)
+# Doesn't exist in Austria
 Printer.print(mwrequest.sendSign(example.Info_Order()))
 
 # You spent enough time in the restaurant. Let's pay our order https://middleware-samples.docs.fiskaltrust.cloud/#e0609e70-5485-48f4-963e-10e06262b2a4
+# Doesn't exist in Austria
 Printer.print(mwrequest.sendSign(example.Info_Order_Pay()))
 
 # The business day comes to an end. In Germany this means the Daily-Closing is necessary https://middleware-samples.docs.fiskaltrust.cloud/#ebb752b7-5cc8-4026-9e13-f2b3ef0e5c87

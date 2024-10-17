@@ -20,10 +20,10 @@ class RestRequest:
 
 
     def sendSign(self, request_json):
-        if COUNTRY != 'FR':
-            sign_url = self.url + "/json/v1/Sign"
-        else:
+        if COUNTRY == 'FR' or COUNTRY == 'AT':
             sign_url = self.url + "/json/Sign"
+        else:
+            sign_url = self.url + "/json/v1/Sign"
         self.request_json = request_json
         try:
             response = requests.post(sign_url,headers=self.headers,data=self.request_json)

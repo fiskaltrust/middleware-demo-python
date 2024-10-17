@@ -8,10 +8,11 @@ class BusinessCaseFactory:
             switcher = {
                 'PosReceipt': 0x4154000000000001,
                 'ZeroReceipt': 0x4154000000000002,
-                'Initial-Operation':0x415400000000000,
+                'Initial-Operation':0x4154000000000003,
                 'Out-Of-Operation': 0x4154000000000004,
                 'Monthly-Closing': 0x4154000000000005,
-                'Yearly-Closing': 0x4154000000000006
+                'Yearly-Closing': 0x4154000000000006,
+                'Void-Flag': 0x0000000000040000
                 # Please add all possible cases in your implementation. See our documentation reference tables.
             }
         elif self.country_code == "DE":
@@ -26,7 +27,8 @@ class BusinessCaseFactory:
                 'Info-Order': 0x4445000100000010,
                 'Fail-Multiple-Transactions': 0x444500010000000B,
                 'Initiate-Switch': 0x4445000100000017,
-                'Finish-Switch': 0x4445000100000018
+                'Finish-Switch': 0x4445000100000018,
+                'Void-Flag': 0x0000000000040000
                 # Please add all possible cases in your implementation. See our documentation reference tables.
 
             }
