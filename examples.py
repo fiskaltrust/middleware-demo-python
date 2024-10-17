@@ -113,6 +113,3 @@ class Example:
         receipt_json = json.dumps(receipt)
         return receipt_json
     
-
-example = Example()
-print(example.PosReceipt())
