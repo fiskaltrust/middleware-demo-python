@@ -73,7 +73,8 @@ class BusinessCaseFactory:
                 'Special1': ChargeItemCase(0x4445000000000003,Decimal('10.7')),
                 'Special2': ChargeItemCase(0x4445000000000004,Decimal('5.5')),
                 'not-taxable': ChargeItemCase(0x4445000000000005,Decimal('0')),
-                'zero': ChargeItemCase(0x4445000000000006,Decimal('0'))
+                'zero': ChargeItemCase(0x4445000000000006,Decimal('0')),
+                'tip-owner-normal': ChargeItemCase(0x4445000000000051,Decimal('19.0'))
                 # Please add all possible cases in your implementation. See our documentation reference tables.
 
             }
@@ -104,7 +105,9 @@ class BusinessCaseFactory:
             switcher = {
                 'Cash': 0x4445000000000001,
                 'Credit': 0x4445000000000005,
-                'Debit': 0x4445000000000004
+                'Debit': 0x4445000000000004,
+                'Tip_Employee': 0x4445000000000010,
+
                 # Please add all possible cases in your implementation. See our documentation reference tables.
 
             }
