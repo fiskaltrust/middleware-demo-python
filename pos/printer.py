@@ -11,8 +11,10 @@ class ReceiptPrinter:
             receipt_ref = ReceiptResponse.cbReceiptReference
             receipt_moment = ReceiptResponse.ftReceiptMoment
             receipt_identifcation = ReceiptResponse.ftReceiptIdentification
+            receipt_link = 'https://receipts-sandbox.fiskaltrust.cloud/v0/' + ReceiptResponse.ftQueueID + '/' + ReceiptResponse.ftQueueItemID
 
             output = f"""
+                ReceiptLink: {receipt_link}
                 -------------------
                 Cashregister Serial: {cash_serial}
                 CashBox:   {cb_id}

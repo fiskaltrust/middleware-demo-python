@@ -74,7 +74,10 @@ class BusinessCaseFactory:
                 'Special2': ChargeItemCase(0x4445000000000004,Decimal('5.5')),
                 'not-taxable': ChargeItemCase(0x4445000000000005,Decimal('0')),
                 'zero': ChargeItemCase(0x4445000000000006,Decimal('0')),
-                'tip-owner-normal': ChargeItemCase(0x4445000000000051,Decimal('19.0'))
+                'tip-owner-normal': ChargeItemCase(0x4445000000000051,Decimal('19.0')),
+                'multi-purpose-voucher-sale': ChargeItemCase(0x4445000000000060,Decimal('0')),
+                'multi-purpose-voucher-redeem': ChargeItemCase(0x4445000000000068,Decimal('0'))
+
                 # Please add all possible cases in your implementation. See our documentation reference tables.
 
             }
