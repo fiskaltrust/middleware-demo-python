@@ -91,7 +91,7 @@ class Example:
         return receipt_json
     
     def Info_Order(self): #https://middleware-samples.docs.fiskaltrust.cloud/#59f790db-dd8f-4339-83ae-6b9652c732eb
-        if self.country == 'AT': #In Austria Quantity and Amount have to be reversed in the Charge and PayItems to void the receipt
+        if self.country == 'AT': #Not available in AT
             print("This ReceiptCase doesn't exist in Austria :)")
 
         else:
@@ -105,7 +105,7 @@ class Example:
             return receipt_json
 
     def Info_Order_Pay(self): #https://middleware-samples.docs.fiskaltrust.cloud/#e0609e70-5485-48f4-963e-10e06262b2a4
-        if self.country == 'AT': #In Austria Quantity and Amount have to be reversed in the Charge and PayItems to void the receipt
+        if self.country == 'AT': #Not available in ATt
             print("This ReceiptCase doesn't exist in Austria :)")
 
         else:    
