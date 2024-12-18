@@ -13,7 +13,7 @@ class RestRequest:
         echo_url = self.url + "/json/v1/Echo"
         self.request_json = request_json
         try:
-            response = requests.post(echo_url,json=self.request_json)
+            response = requests.post(echo_url,json=self.request_json,headers=self.headers)
             print(response.content)
         except requests.exceptions.RequestException as err:
             print ("EchoRequestError:",err)
