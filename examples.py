@@ -76,14 +76,14 @@ class Example:
             receipt = ReceiptRequest(receipt_Cashbox=self.cashboxId,receipt_PosSystemId=self.PosSystemId,receipt_TerminalId=self.TerminalId,receipt_Reference="pos-action-identification-02",ChargeItems=ChargeItems,PayItems=PayItems,receipt_Case=self.factory.GetReceiptCase('PosReceipt')+ self.factory.GetReceiptCase('Void-Flag'),receipt_Amount=Decimal('-4.5')).to_dict()
             receipt_json = json.dumps(receipt)
 
-        else: #In the other countries only the Quantity has to be reversed to void the receipt
+        else: #In the other countries only the Amount has to be reversed to void the receipt
             PayItems = []
             ChargeItems = []
 
-            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-2.0'),ft_charge_description="Coffe to go",ft_charge_amount=Decimal('2.0'),ft_charge_vatRate=self.factory.GetChargeItemCase('Normal').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Normal').ItemCaseCode,))
-            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('-1.0'),ft_charge_description="Brötchen",ft_charge_amount=Decimal('2.5'),ft_charge_vatRate=self.factory.GetChargeItemCase('Discount1').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Discount1').ItemCaseCode,))
+            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('2.0'),ft_charge_description="Coffe to go",ft_charge_amount=Decimal('-2.0'),ft_charge_vatRate=self.factory.GetChargeItemCase('Normal').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Normal').ItemCaseCode,))
+            ChargeItems.append(ChargeItem(ft_charge_quantity=Decimal('1.0'),ft_charge_description="Brötchen",ft_charge_amount=Decimal('-2.5'),ft_charge_vatRate=self.factory.GetChargeItemCase('Discount1').vatRate,ft_charge_Case=self.factory.GetChargeItemCase('Discount1').ItemCaseCode,))
 
-            PayItems.append(PayItem(ft_pay_quantity=Decimal('-1.0'),ft_pay_description="Cash",ft_pay_amount=Decimal('4.5'),ft_pay_Case=self.factory.GetPayItemCase('Cash'),))
+            PayItems.append(PayItem(ft_pay_quantity=Decimal('1.0'),ft_pay_description="Cash",ft_pay_amount=Decimal('-4.5'),ft_pay_Case=self.factory.GetPayItemCase('Cash'),))
 
             receipt = ReceiptRequest(receipt_Cashbox=self.cashboxId,receipt_PosSystemId=self.PosSystemId,receipt_TerminalId=self.TerminalId,receipt_Reference="pos-action-identification-02",ChargeItems=ChargeItems,PayItems=PayItems,receipt_Case=self.factory.GetReceiptCase('PosReceipt') + self.factory.GetReceiptCase('Void-Flag'),receipt_Amount=Decimal('-4.5')).to_dict()
             receipt_json = json.dumps(receipt)
@@ -91,25 +91,33 @@ class Example:
         return receipt_json
     
     def Info_Order(self): #https://middleware-samples.docs.fiskaltrust.cloud/#59f790db-dd8f-4339-83ae-6b9652c732eb
-        PayItems = []
-        ChargeItems = []
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),self.factory.GetChargeItemCase('Normal').vatRate,self.factory.GetChargeItemCase('Normal').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),self.factory.GetChargeItemCase('Discount1').vatRate,self.factory.GetChargeItemCase('Discount1').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
+        if self.country == 'AT': #In Austria Quantity and Amount have to be reversed in the Charge and PayItems to void the receipt
+            print("This ReceiptCase doesn't exist in Austria :)")
 
-        receipt = ReceiptRequest(self.cashboxId,self.PosSystemId,self.TerminalId,"TR-2992",ChargeItems,PayItems,self.factory.GetReceiptCase('Info-Order'),Decimal('13.0'),receipt_User='Astrid').to_dict()
-        receipt_json = json.dumps(receipt)
-        return receipt_json
+        else:
+            PayItems = []
+            ChargeItems = []
+            ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),self.factory.GetChargeItemCase('Normal').vatRate,self.factory.GetChargeItemCase('Normal').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
+            ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),self.factory.GetChargeItemCase('Discount1').vatRate,self.factory.GetChargeItemCase('Discount1').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
+
+            receipt = ReceiptRequest(self.cashboxId,self.PosSystemId,self.TerminalId,"TR-2992",ChargeItems,PayItems,self.factory.GetReceiptCase('Info-Order'),Decimal('13.0'),receipt_User='Astrid').to_dict()
+            receipt_json = json.dumps(receipt)
+            return receipt_json
 
     def Info_Order_Pay(self): #https://middleware-samples.docs.fiskaltrust.cloud/#e0609e70-5485-48f4-963e-10e06262b2a4
-        PayItems = []
-        ChargeItems = []
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),self.factory.GetChargeItemCase('Normal').vatRate,self.factory.GetChargeItemCase('Normal').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
-        ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),self.factory.GetChargeItemCase('Discount1').vatRate,self.factory.GetChargeItemCase('Discount1').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
+        if self.country == 'AT': #In Austria Quantity and Amount have to be reversed in the Charge and PayItems to void the receipt
+            print("This ReceiptCase doesn't exist in Austria :)")
 
-        PayItems.append(PayItem(Decimal('1.0'),"Bar",Decimal('13.0'),self.factory.GetPayItemCase('Cash'),ft_pay_CostCenter='1',ft_pay_MoneyGroup='1'))
+        else:    
+            PayItems = []
+            ChargeItems = []
+            ChargeItems.append(ChargeItem(Decimal('1.0'),"Bier 0,5 liter",Decimal('3.8'),self.factory.GetChargeItemCase('Normal').vatRate,self.factory.GetChargeItemCase('Normal').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Bier',ft_charge_ProductNumber='101',ft_charge_Unit='Liter',ft_charge_UnitQuantity=Decimal('1.0')))
+            ChargeItems.append(ChargeItem(Decimal('1.0'),"Schnitzel",Decimal('9.2'),self.factory.GetChargeItemCase('Discount1').vatRate,self.factory.GetChargeItemCase('Discount1').ItemCaseCode,ft_charge_CostCenter='1',ft_charge_ProductGroup='Speisen',ft_charge_ProductNumber='102',ft_charge_Unit='Stk',ft_charge_UnitQuantity=Decimal('1.0')))
+
+            PayItems.append(PayItem(Decimal('1.0'),"Bar",Decimal('13.0'),self.factory.GetPayItemCase('Cash'),ft_pay_CostCenter='1',ft_pay_MoneyGroup='1'))
 
 
-        receipt = ReceiptRequest(self.cashboxId,self.PosSystemId,self.TerminalId,"TR-2992",ChargeItems,PayItems,self.factory.GetReceiptCase('PosReceipt'),Decimal('13.0'),receipt_User='Astrid').to_dict()
-        receipt_json = json.dumps(receipt)
-        return receipt_json
+            receipt = ReceiptRequest(self.cashboxId,self.PosSystemId,self.TerminalId,"TR-2992",ChargeItems,PayItems,self.factory.GetReceiptCase('PosReceipt'),Decimal('13.0'),receipt_User='Astrid').to_dict()
+            receipt_json = json.dumps(receipt)
+            return receipt_json
     
