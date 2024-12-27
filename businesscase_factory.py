@@ -28,10 +28,13 @@ class BusinessCaseFactory:
                 'Yearly-Closing': 0x4445000100000006,
                 'Daily-Closing': 0x4445000100000007,
                 'Info-Order': 0x4445000100000010,
+                'Info-Delivery-Note': 0x444500000000000F,
+                'Delivery-Note': 0x444500000000000F,
                 'Fail-Multiple-Transactions': 0x444500010000000B,
                 'Initiate-Switch': 0x4445000100000017,
                 'Finish-Switch': 0x4445000100000018,
-                'Void-Flag': 0x0000000000040000
+                'Void-Flag': 0x0000000000040000,
+                'MasterData-Update': 0x0000000008000000
                 # Please add all possible cases in your implementation. See our documentation reference tables.
 
             }
@@ -76,7 +79,12 @@ class BusinessCaseFactory:
                 'zero': ChargeItemCase(0x4445000000000006,Decimal('0')),
                 'tip-owner-normal': ChargeItemCase(0x4445000000000051,Decimal('19.0')),
                 'multi-purpose-voucher-sale': ChargeItemCase(0x4445000000000060,Decimal('0')),
-                'multi-purpose-voucher-redeem': ChargeItemCase(0x4445000000000068,Decimal('0'))
+                'multi-purpose-voucher-redeem': ChargeItemCase(0x4445000000000068,Decimal('0')),
+                'cash-from/to-till': ChargeItemCase(0x4445000000000093,Decimal('0')),
+                'down-payment-creation-normal': ChargeItemCase(0x4445000000000081,Decimal('19.0')),
+                'down-payment-reduction-normal': ChargeItemCase(0x4445000000000089,Decimal('19.0')),
+                'receivable-not-taxable': ChargeItemCase(0x4445000000000075,Decimal('0'))
+
 
                 # Please add all possible cases in your implementation. See our documentation reference tables.
 
@@ -110,6 +118,7 @@ class BusinessCaseFactory:
                 'Credit': 0x4445000000000005,
                 'Debit': 0x4445000000000004,
                 'Tip_Employee': 0x4445000000000010,
+                'Receivable': 0x444500000000000E,
 
                 # Please add all possible cases in your implementation. See our documentation reference tables.
 
