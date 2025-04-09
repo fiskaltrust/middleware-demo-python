@@ -83,7 +83,11 @@ class BusinessCaseFactory:
                 'cash-from/to-till': ChargeItemCase(0x4445000000000093,Decimal('0')),
                 'down-payment-creation-normal': ChargeItemCase(0x4445000000000081,Decimal('19.0')),
                 'down-payment-reduction-normal': ChargeItemCase(0x4445000000000089,Decimal('19.0')),
-                'receivable-not-taxable': ChargeItemCase(0x4445000000000075,Decimal('0'))
+                'receivable-not-taxable': ChargeItemCase(0x4445000000000075,Decimal('0')),
+                'discount-normal': ChargeItemCase(0x4445000000000031,Decimal('19.0')),
+                'discount-noTax': ChargeItemCase(0x4445000000000035,Decimal('0')),
+                'returnable-reverse-normal': ChargeItemCase(0x4445000000000029,Decimal('19.0')),
+                'differenzbesteuerung': ChargeItemCase(0x4445000000000017, None) #VatRate is Custom
 
 
                 # Please add all possible cases in your implementation. See our documentation reference tables.

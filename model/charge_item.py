@@ -10,6 +10,7 @@ class ChargeItem:
         ft_charge_amount: Decimal,
         ft_charge_vatRate: Decimal,
         ft_charge_Case: int,
+        ft_charge_vatAmount: Decimal = None,
         ft_charge_Data: str = None,
         ft_charge_AccountNumber: str = None,
         ft_charge_CostCenter: str = None,
@@ -27,7 +28,7 @@ class ChargeItem:
         self.ChargeCase = ft_charge_Case
         self.ChargeData = ft_charge_Data
         self.ChargeMoment = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%S.%f')[:-3] + 'Z'
-        self.ChargeVatAmount = self.calc_VatAmount()
+        self.ChargeVatAmount = ft_charge_vatAmount if ft_charge_vatAmount is not None else self.calc_VatAmount()
         self.ChargeAccountNumber = ft_charge_AccountNumber
         self.ChargeCostCenter = ft_charge_CostCenter
         self.ChargeProductGroup = ft_charge_ProductGroup
